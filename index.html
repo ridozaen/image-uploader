@@ -16,9 +16,11 @@
     <div id="app">
         <section id="imgbrowser">
             <div class="container">
-                <div class="col-md-4 col-sm-6" v-for="gallery in gallerys">
-                    <h1>{{gallery.user.name}}</h1>
-                    <img v-bind:src="gallery.url">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6" v-for="gallery in gallerys">
+                        <h1>{{gallery.user.name}}</h1>
+                        <img v-bind:src="gallery.url" width="200px">
+                    </div>
                 </div>
             </div>
         </section>
@@ -30,20 +32,20 @@
                         name:
                         <br>
                         <input type="text" v-model='user.name' name="name" id="name">
-                    </div>
-                    <div class="col-md-6">
-                        email:
-                        <br>
-                        <input type="text" name='email' v-model='user.email' id="email">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="submit" name='submit' value="button" class="btn btn-primary" @click="signUp">
-                    </div>
-                        
-                    </form>
+                </div>
+                <div class="col-md-6">
+                    email:
+                    <br>
+                    <input type="text" name='email' v-model='user.email' id="email">
+                </div>
+                <div class="col-md-6">
+                    <input type="submit" name='submit' value="button" class="btn btn-primary" @click="signUp">
+                </div>
+
+                </form>
             </div>
             <div class="container">
-                
+
             </div>
         </section>
     </div>
@@ -52,40 +54,42 @@
         let app = new Vue({
             el: '#app',
             data: {
-                user:[{
+                user: [{
                     name: '',
-                        email: ''
+                    email: ''
                 }],
-                gallerys :[],
-                token : '270687f0-6a1f-11e8-a63b-f3c8083f881b'
+                gallerys: [],
+                token: '270687f0-6a1f-11e8-a63b-f3c8083f881b'
 
             },
             methods: {
 
                 signUp: () => {
                     console.log('ref', this.$event);
-                    this.user = { name: document.getElementById('name').value,
-                                  email: document.getElementById('email').value}
+                    this.user = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value
+                    }
                     console.log(this.user.name, this.user.email)
-                    axios.post('http://35.197.135.159/request-token', {name: this.user.name, email: this.user.email})
-                    .then(response=>{
-                        this.token = response.data.uuid
-                    })
-                    .catch(err=>{
-                        console.log(err)
-                    })
+                    axios.post('http://35.197.135.159/request-token', { name: this.user.name, email: this.user.email })
+                        .then(response => {
+                            this.token = response.data.uuid
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 },
-                showAll : function(){
-                    axios.get('http://35.197.135.159/image',{headers: {'authorization': this.token}})
-                    .then(response=>{
-                        response.data.forEach(data => {
-                            this.gallerys.push (data);
-                            // console.log(data);
+                showAll: function () {
+                    axios.get('http://35.197.135.159/image', { headers: { 'authorization': this.token } })
+                        .then(response => {
+                            response.data.forEach(data => {
+                                this.gallerys.push(data);
+                                // console.log(data);
+                            });
+                        })
+                        .catch(err => {
+                            console.log(err)
                         });
-                    })
-                    .catch(err=>{
-                        console.log(err)
-                    });
                 }
             }
         })
