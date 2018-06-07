@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Uploader</title>
+</head>
+
+<body>
+    <div id="app">
+        <section id="imgbrowser">
+            <div class="container">
+                <div class="col-md-4 col-sm-6">
+                    {{user.name}}
+                </div>
+            </div>
+        </section>
+        <section id="form-uploader">
+            <div class="container">
+                <h1>User Sign Up</h1>
+                <div class="col-md-6">
+                    name:
+                    <br>
+                    <input type="text" v-model='user.name' name="name">
+                </div>
+                <div class="col-md-6">
+                    email:
+                    <br>
+                    <input type="text" name='email' v-model='user.email'>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name='button' value="button" class="btn btn-primary" @click="signUp">
+                </div>
+            </div>
+            <div class="container">
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                user:
+                    {
+                        name: 'test',
+                        email: ''
+                    },
+                gallery:{
+                    
+                },
+                token : '270687f0-6a1f-11e8-a63b-f3c8083f881b'
+
+            },
+            methods: {
+
+                signUp: () => {
+                    console.log(this.$ref);
+                    // axios.post('http://35.197.135.159/image', {}
+                },
+                showAll : function(){
+                    
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
